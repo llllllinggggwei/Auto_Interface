@@ -2,8 +2,8 @@
 
 @author: lingw
 @email: gw.lin@hzgosun.com
-@file: run.py
-@time: 2020-4-23 下午 2:49
+@file: DemoRun.py
+@time: 2020-4-23 下午 4:04
 
 首先，如果商品的描述和图片与实物严重不符，具有欺诈性质甚至涉嫌诈骗，这时买家可以选择报警，或者依据《消费者权益保护法》要求卖家双倍赔偿货款。
 其次，如果商品的描述和图片与实物不符但未到欺诈的程度，买家可以依据《合同法》要求解除合同并返还货款也就是退货。
@@ -11,30 +11,17 @@
 
 """
 
-import pytest
-
-from Framework import DealData, Readconfig
+from Framework import DealData
 
 
-class Test_Interface(object):
-    excel_path = Readconfig.get_excel_path()
-    print(excel_path)
-    request_parameters = DealData.get_excel_text(excel_path)
-    print(request_parameters)
-    def setup_module(module):
-        print("setup_module")
+excel_file = "/test.xlsx"
+def aaaa(excel_file):
+    result = DealData.get_excel_text(excel_file)
+    print(result)
+    a = iter(result)
+    print(x for x in range(5))
+    # print(result[0])
+    # print(result[0]['url'])
+    # print(len(result))
 
-    def teardown_module(module):
-        print("tearDown_module")
-
-    @pytest.mark.parametrize("parameters", request_parameters)
-    def test_1(self, parameters):
-        print(parameters)
-
-    def test_2(self):
-        print(1)
-
-
-
-if __name__ == "__main__":
-    pytest.main(["-v"])
+aaaa(excel_file)
