@@ -10,56 +10,32 @@
 最后，如果商品的描述和图片与实物只是略微不符，例如衣服显示色差等瑕疵，尚不构成根本违约，买家就不能要求卖家退货，只能下次网购的时候多加注意。
 
 """
+import requests,json
+from Framework.RequestsProcess import get_requests
 
-import os, time
+url = 'http://181.181.0.33:22020/api/acs/v1/door_ban/insert'
+data = {
+ "doorBanSn":"1111",
+ "ip":"1.1.1.1",
+ "doorBanName":"门禁1",
+ "manufacturer":"厂商1",
+ "model":"型号1",
+ "longitude":120.333,
+ "latitude":20.333,
+ "regionCode":"330104",
+ "communityCode":"330104",
+ "direction":"0",
+ "installationAddress":"杭州下去",
+ "remark":"没有备注",
+ "state":0
+}
 
-os.path.abspath(os.path.join(os.getcwd(), "..\\Config\\config.ini"))
-# from Framework import DealData
-#
-#
-# excel_file = "/test.xlsx"
-# def aaaa(excel_file):
-#     result = DealData.get_excel_text(excel_file)
-#     print(result)
-#     a = iter(result)
-#     print(x for x in range(5))
-#     # print(result[0])
-#     # print(result[0]['url'])
-#     # print(len(result))
-#
-# aaaa(excel_file)
-#
-# import requests, json
-#
-# url = 'http://181.181.0.50:22020/api/camera/v1/camera/insert'
-# url_get = 'https://181.181.0.50:24220/bow/search/detail/person'
-# url1 = 'www.baidu.com'
-# data = {
-# 	"id":"",
-# 	"cameraSn":"10011",
-# 	"direction":"",
-# 	"manufacturer":"",
-# 	"model":"ssr1l2",
-# 	"cameraName":"python_post",
-# 	"ip":"181.181.111.2",
-# 	"regionCode":"330105",
-# 	"communityCode":"330106B10F4C",
-# 	"longitude":70.27,
-# 	"latitude":96.40,
-# 	"state":5,
-# 	"installationAddress":"",
-# 	"type":9,
-# 	"username":"admin",
-# 	"password":"abcd1234",
-# 	"remark":"cevcya"
-# }
-# params = {"idcard":"331021199901010101",
-#            "personType":"3"}
-# data_json = json.dumps(data)
-# headers = {"Content-Type":"application/json"}
-# r = requests.post(url=url,data=data_json,headers=headers).json()
-# r1 = requests.post(url=url,data=data_json,headers=headers)
-# rget = requests.get(url=url_get,params=params,verify=False)
-# # print(r.text["status"])
-# print(r)
-# print(r1.status_code)
+headers = str({'Content-Type':'application/json'})
+
+# a = requests.post(url=url, headers=headers,data=json.dumps(data),verify=False)
+# print(a.json())
+print(headers)
+print(url)
+print(type(data))
+a = get_requests(method='post',url=url, headers=headers,data=data)
+print(a.json())

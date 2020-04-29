@@ -13,8 +13,7 @@
 
 
 import openpyxl
-import requests
-import json
+
 
 from setting import dicfile
 
@@ -51,23 +50,6 @@ def get_excel_text(excle_path):
             list.append(dict)
         return list
             # print(single_request)
-
-def get_requests(request_method, headers, url, data):
-    if request_method == 'get' or request_method == 'GET':
-        request = requests.get(url=url, params=data, verify=False).json()
-        return request
-    elif request_method == 'post' or request_method == 'POST':
-        data_json = json.dumps(data)
-        request = requests.post(url=url, headers=headers, data=data_json).json()
-        return request
-    elif request_method == 'put' or request_method == 'PUT':
-        request = requests.put(url=url, headers=headers, data=data).json()
-        return request
-    elif request_method == 'delete' or request_method == 'DELETE':
-        request = requests.delete(url=url).json()
-        return request
-    else:
-        return "方法不在get,post,put,delete范围内"
 
 
 

@@ -12,16 +12,16 @@
 """
 
 import pytest
+import json
 
 from Framework import DealData, Readconfig
 from Framework.GetLogger import modlog
+from Framework.RequestsProcess import get_requests
 
 
 class Test_Interface(object):
     excel_path = Readconfig.get_excel_path()
-    print(excel_path)
     request_parameters = DealData.get_excel_text(excel_path)
-    print(request_parameters)
     def setup_module(module):
         print("setup_module")
 
@@ -30,7 +30,23 @@ class Test_Interface(object):
 
     @pytest.mark.parametrize("parameters", request_parameters)
     def test_1(self, parameters, modlog=modlog):
-        print(parameters)
+        url = parameters["url"]
+        data = parameters["data"]
+        headers = parameters["headers"]
+        method = parameters["method"]
+        assert_data = parameters["assert-text"]
+        state = parameters["state"]
+        # print(url,
+        #       data,
+        #       headers,
+        #       method,
+        #       assert_data,
+        #       state)
+        rq = get_requests(method=method, url=url, data=data, headers=headers)
+        print(rq.text)
+        assert rq.status_code == 200
+
+
 
     def test_2(self,modlog=modlog):
         print(1)

@@ -16,15 +16,20 @@ import codecs
 
 from setting import dicfile
 
+# 获取config路径
 Config_Path = dicfile() +  "\\Config\\config.ini"
 cf = configparser.ConfigParser()
+# 使用utf-8的编码读取文件
 cf.read_file(codecs.open(Config_Path, "r", 'utf-8-sig'))
+# 获取cofig下的section
 secs = cf.sections()
 
+# 获得config文件中的case路径
 def get_excel_path():
     excel_path = cf.get("Test-Case", "excel_path")
     return excel_path
 
+# 获得config文件中的log-set
 def get_log_set():
     log_format = cf.get("Log-Set", "log_format")
     log_datefmt = cf.get("Log-Set", "log_datefmt")

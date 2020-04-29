@@ -13,6 +13,7 @@
 
 import os
 
+# 当前文件上级的绝对路径
 def dicfile():
     dir = os.path.abspath(os.path.dirname(__file__))
     return dir
