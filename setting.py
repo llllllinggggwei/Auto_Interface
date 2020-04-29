@@ -2,8 +2,8 @@
 
 @author: lingw
 @email: gw.lin@hzgosun.com
-@file: demo_run.py
-@time: 2020-4-23 下午 4:04
+@file: setting.py
+@time: 2020-4-29 下午 2:26
 
 首先，如果商品的描述和图片与实物严重不符，具有欺诈性质甚至涉嫌诈骗，这时买家可以选择报警，或者依据《消费者权益保护法》要求卖家双倍赔偿货款。
 其次，如果商品的描述和图片与实物不符但未到欺诈的程度，买家可以依据《合同法》要求解除合同并返还货款也就是退货。
@@ -11,13 +11,8 @@
 
 """
 
-from Framework import deal_data
+import os
 
-
-excel_file = "/test.xlsx"
-def aaaa(excel_file):
-    result = deal_data.get_excel_text(excel_file)
-    print(result)
-    print(len(result))
-
-aaaa(excel_file)
+def dicfile():
+    dir = os.path.abspath(os.path.dirname(__file__))
+    return dir

@@ -14,6 +14,7 @@
 import pytest
 
 from Framework import DealData, Readconfig
+from Framework.GetLogger import modlog
 
 
 class Test_Interface(object):
@@ -28,10 +29,10 @@ class Test_Interface(object):
         print("tearDown_module")
 
     @pytest.mark.parametrize("parameters", request_parameters)
-    def test_1(self, parameters):
+    def test_1(self, parameters, modlog=modlog):
         print(parameters)
 
-    def test_2(self):
+    def test_2(self,modlog=modlog):
         print(1)
 
 

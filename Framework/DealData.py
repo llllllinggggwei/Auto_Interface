@@ -14,14 +14,17 @@
 
 import openpyxl
 import requests
-import os
+import json
 
-Test_Case_Path = os.path.abspath(os.path.join(os.getcwd(), "..\\TestCase"))
+from setting import dicfile
+
+Test_Case_Path = dicfile() +  "\\TestCase"
 
 def get_excel_text(excle_path):
     # 获取excel文件路径
-    exccle_file = Test_Case_Path + excle_path
-    wb = openpyxl.load_workbook(exccle_file)
+    excle_file = Test_Case_Path + excle_path
+    print(excle_file)
+    wb = openpyxl.load_workbook(excle_file)
     sheets = wb.sheetnames
     # 获取excel第一个sheet
     ws = wb[sheets[0]]
@@ -51,10 +54,11 @@ def get_excel_text(excle_path):
 
 def get_requests(request_method, headers, url, data):
     if request_method == 'get' or request_method == 'GET':
-        request = requests.get(url=url, params=data).json()
+        request = requests.get(url=url, params=data, verify=False).json()
         return request
     elif request_method == 'post' or request_method == 'POST':
-        request = requests.post(url=url, headers=headers, data=data).json()
+        data_json = json.dumps(data)
+        request = requests.post(url=url, headers=headers, data=data_json).json()
         return request
     elif request_method == 'put' or request_method == 'PUT':
         request = requests.put(url=url, headers=headers, data=data).json()

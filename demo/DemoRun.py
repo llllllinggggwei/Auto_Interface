@@ -11,17 +11,55 @@
 
 """
 
-from Framework import DealData
+import os, time
 
-
-excel_file = "/test.xlsx"
-def aaaa(excel_file):
-    result = DealData.get_excel_text(excel_file)
-    print(result)
-    a = iter(result)
-    print(x for x in range(5))
-    # print(result[0])
-    # print(result[0]['url'])
-    # print(len(result))
-
-aaaa(excel_file)
+os.path.abspath(os.path.join(os.getcwd(), "..\\Config\\config.ini"))
+# from Framework import DealData
+#
+#
+# excel_file = "/test.xlsx"
+# def aaaa(excel_file):
+#     result = DealData.get_excel_text(excel_file)
+#     print(result)
+#     a = iter(result)
+#     print(x for x in range(5))
+#     # print(result[0])
+#     # print(result[0]['url'])
+#     # print(len(result))
+#
+# aaaa(excel_file)
+#
+# import requests, json
+#
+# url = 'http://181.181.0.50:22020/api/camera/v1/camera/insert'
+# url_get = 'https://181.181.0.50:24220/bow/search/detail/person'
+# url1 = 'www.baidu.com'
+# data = {
+# 	"id":"",
+# 	"cameraSn":"10011",
+# 	"direction":"",
+# 	"manufacturer":"",
+# 	"model":"ssr1l2",
+# 	"cameraName":"python_post",
+# 	"ip":"181.181.111.2",
+# 	"regionCode":"330105",
+# 	"communityCode":"330106B10F4C",
+# 	"longitude":70.27,
+# 	"latitude":96.40,
+# 	"state":5,
+# 	"installationAddress":"",
+# 	"type":9,
+# 	"username":"admin",
+# 	"password":"abcd1234",
+# 	"remark":"cevcya"
+# }
+# params = {"idcard":"331021199901010101",
+#            "personType":"3"}
+# data_json = json.dumps(data)
+# headers = {"Content-Type":"application/json"}
+# r = requests.post(url=url,data=data_json,headers=headers).json()
+# r1 = requests.post(url=url,data=data_json,headers=headers)
+# rget = requests.get(url=url_get,params=params,verify=False)
+# # print(r.text["status"])
+# print(r)
+# print(r1.status_code)

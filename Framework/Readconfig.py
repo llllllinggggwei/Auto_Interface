@@ -11,21 +11,24 @@
 
 """
 
-import configparser, os
+import configparser
+import codecs
+
+from setting import dicfile
+
+Config_Path = dicfile() +  "\\Config\\config.ini"
+cf = configparser.ConfigParser()
+cf.read_file(codecs.open(Config_Path, "r", 'utf-8-sig'))
+secs = cf.sections()
 
 def get_excel_path():
-    Config_Path = os.path.abspath(os.path.join(os.getcwd(), "..\\Config\\config.ini"))
-
-    cf = configparser.ConfigParser()
-    cf.read(Config_Path)
-
-    secs = cf.sections()
-    print(secs)
-
-
     excel_path = cf.get("Test-Case", "excel_path")
     return excel_path
 
+def get_log_set():
+    log_format = cf.get("Log-Set", "log_format")
+    log_datefmt = cf.get("Log-Set", "log_datefmt")
+
+    return log_format, log_datefmt
+
 get_excel_path()
-
-
