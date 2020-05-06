@@ -10,32 +10,26 @@
 最后，如果商品的描述和图片与实物只是略微不符，例如衣服显示色差等瑕疵，尚不构成根本违约，买家就不能要求卖家退货，只能下次网购的时候多加注意。
 
 """
-import requests,json
-from Framework.RequestsProcess import get_requests
 
-url = 'http://181.181.0.33:22020/api/acs/v1/door_ban/insert'
-data = {
- "doorBanSn":"1111",
- "ip":"1.1.1.1",
- "doorBanName":"门禁1",
- "manufacturer":"厂商1",
- "model":"型号1",
- "longitude":120.333,
- "latitude":20.333,
- "regionCode":"330104",
- "communityCode":"330104",
- "direction":"0",
- "installationAddress":"杭州下去",
- "remark":"没有备注",
- "state":0
-}
 
-headers = str({'Content-Type':'application/json'})
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        ln = len(str(n))
+        x = 0
+        for i in range(ln):
+            i = i+1
+            if i != (ln):
+                a = n % (10 ** i)
+            else:
+                a = n // (10 ** (i-1))
+            x = x + (a ** 2)
+        if x == n and x != 1:
+            print("False")
+            return False
+        elif x == 1:
+            print("666")
+            return True
+        else:
+            Solution.isHappy(self, x)
 
-# a = requests.post(url=url, headers=headers,data=json.dumps(data),verify=False)
-# print(a.json())
-print(headers)
-print(url)
-print(type(data))
-a = get_requests(method='post',url=url, headers=headers,data=data)
-print(a.json())
+Solution.isHappy(self=Solution,n=68)

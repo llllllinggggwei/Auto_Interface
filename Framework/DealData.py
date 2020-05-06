@@ -33,19 +33,12 @@ def get_excel_text(excle_path):
     cols = ws.max_column
 
     if rows < 2:
-        return "该excel除了表头还有别的吗"
+        return "该excel除了表头还有别的吗,你不会连表头都没有吧"
     else:
         list = []
         for row in range(2, rows + 1):
             dict = {}
             for col in range(1, cols+1):
-                # j = 3
-                # url = ws.cell(j, 4).value
-                # headers = ws.cell(j, 5).value
-                # request_meathod = ws.cell(j, 6).value
-                # data = ws.cell(j, 7).value
-                # single_request = get_requests(request_method=request_meathod, headers=headers, url=url, data=data)
-                # list.append(single_request)
                 dict[ws.cell(1, col).value] = ws.cell(row, col).value
             list.append(dict)
         return list

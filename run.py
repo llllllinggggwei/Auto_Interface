@@ -28,23 +28,20 @@ class Test_Interface(object):
     def teardown_module(module):
         print("tearDown_module")
 
+    #通过pytest.mark.parametrize遍历数组request_parameters输入参数
     @pytest.mark.parametrize("parameters", request_parameters)
     def test_1(self, parameters, modlog=modlog):
         url = parameters["url"]
         data = parameters["data"]
         headers = parameters["headers"]
         method = parameters["method"]
-        assert_data = parameters["assert-text"]
+        assert_data = str(parameters["assert-text"])
         state = parameters["state"]
-        # print(url,
-        #       data,
-        #       headers,
-        #       method,
-        #       assert_data,
-        #       state)
         rq = get_requests(method=method, url=url, data=data, headers=headers)
         print(rq.text)
         assert rq.status_code == 200
+        assert rq.json()['status'] == state
+        assert assert_data in rq.json()['message']
 
 
 

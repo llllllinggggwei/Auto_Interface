@@ -14,6 +14,14 @@ import requests
 import json
 
 def get_requests(method, headers, url, data):
+    if data:
+        data = eval(data)
+    else:
+        data = data
+    if headers:
+        headers = eval(headers)
+    else:
+        headers = headers
 
     # get请求
     if method == 'get' or method == 'GET':
@@ -21,14 +29,13 @@ def get_requests(method, headers, url, data):
         return request
     # post请求
     elif method == 'post' or method == 'POST':
-        data = eval(data)
-        headers=eval(headers)
         data_json = json.dumps(data)
         request = requests.post(url=url, headers=headers, data=data_json, verify=False)
         return request
     # put请求
     elif method == 'put' or method == 'PUT':
-        request = requests.put(url=url, headers=headers, data=data, verify=False)
+        data_json = json.dumps(data)
+        request = requests.put(url=url, headers=headers, data=data_json, verify=False)
         return request
     # delete请求
     elif method == 'delete' or method == 'DELETE':
