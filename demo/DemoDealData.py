@@ -20,22 +20,25 @@ import json
 def get_excel_text():
     wb = openpyxl.load_workbook("../TestCase/test.xlsx")
     sheets = wb.sheetnames
-    ws = wb[sheets[0]]
-    rows = ws.max_row
-    cols = ws.max_column
-    print(rows, cols)
-    if rows < 2:
-        return "该页面除了表头还有别的吗"
-    else:
-        for j in range(2, rows+1):
-            j = 3   # 方便单次调试
-            url = ws.cell(j, 4).value
-            headers = ws.cell(j, 5).value
-            request_meathod = ws.cell(j, 6).value
-            data = ws.cell(j, 7).value
-            a = get_requests(request_method=request_meathod, headers=headers, url=url, data=data)
-            print(a)
-            break  # 方便单次调试
+    for sheet in sheets:
+        ws = wb[sheet]
+        print(ws.cell(1,1).value)
+        rows = ws.max_row
+        cols = ws.max_column
+        print(rows,cols)
+        # print(rows, cols)
+        # if rows < 2:
+        #     return "该页面除了表头还有别的吗"
+        # else:
+        #     for j in range(2, rows+1):
+        #         j = 3   # 方便单次调试
+        #         url = ws.cell(j, 4).value
+        #         headers = ws.cell(j, 5).value
+        #         request_meathod = ws.cell(j, 6).value
+        #         data = ws.cell(j, 7).value
+        #         a = get_requests(request_method=request_meathod, headers=headers, url=url, data=data)
+        #         print(a)
+        #         break  # 方便单次调试
 
 
 

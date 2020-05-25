@@ -13,6 +13,7 @@
 import requests
 import json
 
+
 def get_requests(method, headers, url, data):
     if data:
         data = eval(data)
@@ -29,7 +30,7 @@ def get_requests(method, headers, url, data):
         return request
     # post请求
     elif method == 'post' or method == 'POST':
-        data_json = json.dumps(data)
+        data_json = json.dumps(data, ensure_ascii=False)
         request = requests.post(url=url, headers=headers, data=data_json, verify=False)
         return request
     # put请求

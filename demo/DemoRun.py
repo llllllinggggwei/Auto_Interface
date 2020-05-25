@@ -11,25 +11,3 @@
 
 """
 
-
-class Solution:
-    def isHappy(self, n: int) -> bool:
-        ln = len(str(n))
-        x = 0
-        for i in range(ln):
-            i = i+1
-            if i != (ln):
-                a = n % (10 ** i)
-            else:
-                a = n // (10 ** (i-1))
-            x = x + (a ** 2)
-        if x == n and x != 1:
-            print("False")
-            return False
-        elif x == 1:
-            print("666")
-            return True
-        else:
-            Solution.isHappy(self, x)
-
-Solution.isHappy(self=Solution,n=68)

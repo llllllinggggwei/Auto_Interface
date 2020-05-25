@@ -22,16 +22,42 @@ from Framework.RequestsProcess import get_requests
 class Test_Interface(object):
     excel_path = Readconfig.get_excel_path()
     request_parameters = DealData.get_excel_text(excel_path)
+    base_url = Readconfig.get_url()
+    username = Readconfig.get_user_password()[0]
+    password = Readconfig.get_user_password()[1]
+    login_data = [(username,password)]
     def setup_module(module):
-        print("setup_module")
+        print("--------执行用例开始-----------")
 
     def teardown_module(module):
-        print("tearDown_module")
+        print("--------执行用例结束-----------")
 
+    # @pytest.mark.login
+    @pytest.mark.parametrize("username,password",login_data)
+    def test_login(self,username,password):
+
+        url = self.base_url +"/api/v1/auth-center/oauth/token?username={}&password={}&grant_type=password&scope=app&client_id=view&client_secret=view".format(username,password)
+        # url = self.base_url +"/api/v1/auth-center/oauth/token"
+        headers = {
+            "Content-Type": "application/json",
+            "charset":"UTF-8"
+                   }
+        # data ={
+        #         "username":username,
+        #         "password":password,
+        #         "grant_type":"password",
+        #         "scope":"app",
+        #         "client_id":"view",
+        #         "client_secret":"view"
+        # }
+        data={}
+        a = get_requests("post",str(headers),url=url,data=data)
+        return a.json()['access_token']
     #通过pytest.mark.parametrize遍历数组request_parameters输入参数
+    @pytest.mark.skip
     @pytest.mark.parametrize("parameters", request_parameters)
     def test_1(self, parameters, modlog=modlog):
-        url = parameters["url"]
+        url = self.base_url + parameters["url"]
         data = parameters["data"]
         headers = parameters["headers"]
         method = parameters["method"]
@@ -42,9 +68,10 @@ class Test_Interface(object):
         assert rq.status_code == 200
         assert rq.json()['status'] == state
         assert assert_data in rq.json()['message']
+        print(rq.json()['message'])
 
 
-
+    @pytest.mark.skip
     def test_2(self,modlog=modlog):
         print(1)
 
