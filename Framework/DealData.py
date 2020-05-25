@@ -25,24 +25,24 @@ def get_excel_text(excle_path):
     print(excle_file)
     wb = openpyxl.load_workbook(excle_file)
     sheets = wb.sheetnames
-    # 获取excel第一个sheet
-    ws = wb[sheets[0]]
-    # 共多少行
-    rows = ws.max_row
-    # 共多少列
-    cols = ws.max_column
-
-    if rows < 2:
-        return "该excel除了表头还有别的吗,你不会连表头都没有吧"
-    else:
-        list = []
-        for row in range(2, rows + 1):
-            dict = {}
-            for col in range(1, cols+1):
-                dict[ws.cell(1, col).value] = ws.cell(row, col).value
-            list.append(dict)
-        return list
-            # print(single_request)
+    list = []
+    # 获取excel所有sheet
+    for sheet in sheets:
+        ws = wb[sheet]
+        # 共多少行
+        rows = ws.max_row
+        # 共多少列
+        cols = ws.max_column
+        if rows < 2:
+            print("{}下的sheet:{}除了表头还有别的吗,你不会连表头都没有吧".format(excle_path,sheet))
+        else:
+            for row in range(2, rows + 1):
+                dict = {}
+                for col in range(1, cols+1):
+                    dict[ws.cell(1, col).value] = ws.cell(row, col).value
+                list.append(dict)
+    return list
+    # print(single_request)
 
 
 

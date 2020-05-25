@@ -26,8 +26,14 @@ secs = cf.sections()
 
 # 获得config文件中的case路径
 def get_excel_path():
-    excel_path = cf.get("Test-Case", "excel_path")
-    return excel_path
+    return cf.get("Test-Case", "excel_path")
+
+def get_user_password():
+    return cf.get("user-password","username"), cf.get("user-password","password")
+
+# 获得config文件中的url路径
+def get_url():
+    return cf.get("IP-Port", "base_url")
 
 # 获得config文件中的log-set
 def get_log_set():
